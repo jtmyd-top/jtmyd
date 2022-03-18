@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    {% block title %}
+    <title>用户注册</title>
+    {% endblock title %}
+    <link rel="stylesheet" href="{% static 'simple-line-icons-master/css/simple-line-icons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'reg.css' %}"/>
+</head>
+<body>
+{% block reg1 %}
+   <div class="reg" id="reg1">
+
+       <header>
+           <h1>
+                <a href="admin">
+                    用户注册
+                </a>
+            </h1>
+            <p>
+                    永远相信美好的事情即将发生
+            </p>
+       </header>
+       <form action="{% url 'myapp:register' %}" method="POST" class="from-register" novalidate>
+           {% csrf_token %}
+           {{register_form.username}}
+           {{register_form.email}}
+           <select class="from-select" name="email2">
+                    <option value="@qq.com">@qq.com</option>
+                    <option value="@gmail.com">@gmail.com</option>
+                    <option value="@163.com">@163.com</option>
+                    <option value="@yahoo.com">@yahoo.com</option>
+                    <option value="@sina.com">@sina.com</option>
+                    <option value="@126.com">@126.com</option>
+                    <option value="@outlook.com">@outlook.com</option>
+                    <option value="@yeah.net">@yeah.net</option>
+                    <option value="@foxmail.com">@foxmail.com</option>
+           </select>
+           {{register_form.password}}
+           {{register_form.password2}}
+           {{register_form.code}}
+           <img id="canvas" onclick="changeImg(this);" src="{% url 'myapp:code' %}" alt="" title="点击更换">
+           <script>
+        // 通过changeImg事件来更换图片
+        function changeImg(ths) {
+            ths.src = ths.src + '?';
+            console.log(ths.src);
+        }
+          </script>
+           {% comment %}
+           谷歌验证码
+           <script src="//recaptcha.net/recaptcha/api.js"></script>
+           <div class="g-recaptcha" data-sitekey="6Lft9pgcAAAAACc5EEMDC2XwekLvFy7WVfPRdHtU"></div>
+            <p>
+                <input type="text" placeholder="验证码"  width="100%" class="from-yzm"/>
+               <canvas id="canvas1"></canvas>
+            </p>
+            <script  src="{% static 'reg.js' %}" rel="text/javascript"></script>&ndash;&gt;
+            {% endcomment %}
+
+           <button type="submit" class="btn btn-block">
+               <span>
+                 <i class="si si-emoticon-smile mr-1" ></i>
+<!--                 fa fa-sign-in fa-1x logo-1-->
+                 下一步
+               </span>
+           </button>
+           {%if msg == "请按规则输入表单各项"%}
+           <div class="error">
+               <p class="msg" style="text-align: center"><b>{{ msg }}</b></p>
+               <p class="p1" style="text-align: center">{{ register_form.username.errors.0 }}</p>
+               <p class="p2" style="text-align: center">{{ register_form.email.errors.0 }}</p>
+               <p class="p3" style="text-align: center">{{ register_form.password.errors.0 }}</p>
+               <p class="p4" style="text-align: center">{{ register_form.password2.errors.0 }}</p>
+               <p class="p5" style="text-align: center">{{ register_form.code.errors.0 }}</p>
+           </div>
+           <script type="text/javascript">
+               alert("请按规则输入账户或密码:\n"+"{{ register_form.username.errors.0 }}\n"+"{{ register_form.email.errors.0 }}\n"+"{{ register_form.password.errors.0 }}\n"+"{{ register_form.password2.errors.0 }}\n"+"{{ register_form.code.errors.0 }}")
+           </script>
+           {%endif%}
+           {% if msg == "用户名或邮箱已被注册"%}
+           <p class="msg" style="text-align: center"><b>{{ msg }}</b></p>
+           <script type="text/javascript">
+               alert("用户名或邮箱已被注册\n")
+            </script>
+           {% endif %}
+           {% if msg == "两次密码不一致"%}
+           <p class="msg" style="text-align: center"><b>{{ msg }}</b></p>
+           <script type="text/javascript">
+               alert("两次密码不一致\n")
+            </script>
+           {% endif %}
+            {% if msg == "验证码不正确"%}
+           <p class="msg" style="text-align: center"><b>{{ msg }}</b></p>
+           <script type="text/javascript">
+               alert("验证码不正确\n")
+            </script>
+           {% endif %}
+           {% if msg == "请先注册账户再来实名认证"%}
+           <script type="text/javascript">
+               alert("请先注册账户再来实名认证\n")
+            </script>
+            <p class="msg" style="text-align: center"><b>{{ msg }}</b></p>
+           {% endif %}
+      <a href="{% url 'myapp:user' %}" class="zc">
+          <div class="btn btn-block  btn-block1">
+                 <i class="si si-emoticon-smile mr-1" ></i>
+                 返回登录
+           </div>
+      </a>
+ </form>
+   </div>
+{% endblock reg1 %}
+</body>
+</html>

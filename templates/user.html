@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+
+    <link rel="stylesheet" href="{% static 'simple-line-icons-master/css/simple-line-icons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'user.css' %}"/>
+</head>
+<body>
+{% comment %}
+<div class="book_logo">
+    <a href="{%url 'myapp:user' %}">
+        <img src="{% static 'book_top.png' %}" alt="湖南电子科技职业学院" class="logo_img">
+    </a>
+    <span>图书馆</span>
+</div>
+{% endcomment %}
+<!--python注释标签 -->{% comment %}
+  <div class="imgBox" id="imgBox">
+      <img src="{% static '1.png'%}" width="100%" height="100%" class="img img-slide">
+      <img src="{% static '5.JPG'%}" class="img img-slide">
+      <img src="{% static '1.png'%}" class="img img-slide">
+      <img src="{% static '5.JPG'%}"  class="img img-slide">
+  </div>
+  <script type="text/javascript">
+        // index：索引， len：长度
+        var index = 0, len;
+        // 类似获取一个元素数组
+        var imgBox = document.getElementsByClassName("img-slide");
+        len = imgBox.length;
+        imgBox[index].style.display = 'block';
+        // 逻辑控制函数
+        function slideShow() {
+            index ++;
+            // 防止数组溢出
+            if(index >= len) index = 0;
+            // 遍历每一个元素
+            for(var i=0; i<len; i++) {
+                imgBox[i].style.display = 'none';
+            }
+            // 每次只有一张图片显示
+            imgBox[index].style.display = 'block';
+        }
+        // 定时器，间隔3s切换图片
+        setInterval(slideShow, 3000);
+ </script>
+  {% endcomment %}
+  <div class="dl">
+   <header>
+       <h1>
+            <a href="#">
+                 用户登录
+            </a>
+       </h1>
+       <p>
+           数据安全高于一切
+       </p>
+   </header>
+   <form action="{% url 'myapp:user'%}" method="POST" class="yhdl" novalidate>
+        {% csrf_token %}
+       {{ form.username }}
+       {{ form.password }}
+       {% if msg == "请按规则输入账户或密码" %}
+       <script type="text/javascript">
+          alert("请按规则输入账户或密码:\n\t"+"{{ form.username.errors.0 }}\n\t"+"{{ form.password.errors.0 }}")
+       </script>
+       <div class="errors" class="errors">
+           <p style="color:red" class="errors_01">{{ form.username.errors.0 }}</p>
+           <p style="color:red" class="errors_02">{{ form.password.errors.0 }}</p>
+       </div>
+       {% endif %}
+       {% if msg == "账户或密码错误"%}
+       <script type="text/javascript">
+          alert("账户或密码错误")
+       </script>
+       {%endif%}
+       {%if msg == "账户被锁定，请<a href=../forgetpassword/>重置密码</a>后再来登陆" %}
+       <script type="text/javascript">
+       alert("账户被锁定,请重置密码后再来登陆")
+       </script>
+       {%endif%}
+       <button type="submit" class="logo">
+             <span>
+                 <i class="si si-login mr-1" aria-hidden="true"></i>
+<!--fa fa-sign-in fa-1x logo-1-->
+                 登录
+             </span>
+           </button>
+       <div class="Ribbon">
+           <a href="{% url 'myapp:register' %}" class="zc">注册</a>
+           <div class="div-bor"></div>
+           <a href="{% url 'myapp:forgetpassword' %}" class="zc">忘记密码</a>
+           <div class="div-bor"></div>
+           <a href="#" class="zc" onclick="javascript:history.go(-1)">返回上一层</a>
+       </div>
+
+   </form>
+      <div class="msg">
+      {% autoescape off %}
+<p style="color: red;text-align: center">{{ msg }}</p>
+      {% endautoescape  %}</div>
+</div>
+</body>
+</html>

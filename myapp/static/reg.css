@@ -1,0 +1,353 @@
+input::-webkit-input-placeholder {
+    font-size:1.2em;
+    color: #101010;
+}
+input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    font-size:1.2em;
+    color: #101010;
+  }
+
+input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    font-size:1.2em;
+    color: #101010;
+  }
+
+input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    font-size:1.2em;
+    color: #101010;
+  }
+
+ .error {
+    position: absolute;
+    top: -12%;
+    left: -1%;
+    z-index: -1;
+    color: red;
+    width: 100%;
+    height: 91%;
+}
+.msg {
+    position: absolute;
+    top: 2%;
+    left: 38%;
+}
+.p1 {
+    position: absolute;
+    top: 23%;
+    left: 43%;
+}
+.p2 {
+    position: absolute;
+    top: 56%;
+    left: 42%;
+}
+p.p3 {
+    position: absolute;
+    top: 91%;
+    left: 40%;
+}
+.p4 {
+    position: absolute;
+    top: 125%;
+    left: 43%;
+}
+.p5 {
+    position: absolute;
+    top: 160%;
+    left: 40%;
+}
+.p6 {
+    position: absolute;
+    top: 22%;
+    left: 45%;
+}
+.p7 {
+    position: absolute;
+    top: 56%;
+    left: 51%;
+}
+html{width:100%;
+height:100%;
+}
+        body{
+     width:100%;
+     height:100%;
+     background-image:url("https://unsplash.it/1600/900?random");
+     #background-image:url("./book1.jpg");
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-position: 50% 50%;
+     background-color: #e8eaf2;
+     position:inherit;
+	 top:0;
+     left:0;
+     margin:0;
+     padding:0;
+     }
+     .reg{
+           width: 40%;
+    height:100%;
+    background: #fff;
+     background: rgba(255,255,254,0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+     }
+     header{
+         width: 80%;
+    position: absolute;
+    top: 0;
+    left: 8%;
+      #   border: 1px solid red;
+    }
+     header>h1,header>p{
+        height:100px;
+        text-align: center;
+        line-height: 100px;
+ #      border:1px solid red;
+     }
+     header>h1>a{
+         color: #343a40!important;
+         text-decoration:none;
+     }
+     header>h1{
+        margin:0px;
+     }
+     header>p{
+        height:30px;
+        line-height:30px;
+        margin-top:-30px;
+        color: #6c757d!important;
+        font-weight:bolder;
+     }
+        header>h1>a::before{
+            content:'';
+			display:block;
+			/*开始时候下划线的宽度为0*/
+			width:0;
+			height:3px;
+			position:absolute;
+            left:39.5%;
+			top:70px;
+			/*这里我们设定所有改变都有动画效果，可以自己指定样式才有动画效果*/
+			transition:all 3s ease-in-out;
+}
+    header>h1>a:hover::before{
+            width:129px;
+    }
+    .from-register{
+  #  border:1px solid red;
+        width: 100%;
+        height: 250px;
+        position: absolute;
+        top: 110px;
+        left: 0;
+    }
+     .canva,.form-username,.form-control,.from-pwd,.btn-block,.from-yzm,.from-select,#canvas{
+    background: rgba(253,2,9,0);
+    height: 60px;
+    font-size: 1em;
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #333;
+    border-radius: .25rem;
+    margin-left: 18%;
+    margin-top: 3%;
+}
+
+     .si{
+            font-family: simple-line-icons;
+            speak: none;
+            font-style: normal;
+            font-weight: 400;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+ }
+     .btn-block{
+     width: 62%;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: .0625rem;
+    font-weight: 700;
+    padding: .625rem 1.5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    background-color: #0665d0;
+    border: none;
+    box-shadow: 0 0.125rem 0.75rem rgb(4 65 134 / 25%);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,transform .12s ease-out;
+
+}
+
+ .from-select {
+    position: absolute;
+    left: 40%;
+    width: 22%;
+    border-radius: 0 0.25rem 0.25rem 0;
+    color: #5b29e9;
+}
+  .form-username{
+              width: 62%;
+
+
+  }
+  .form-control{border-right:none;
+border-radius:.25rem 0 0 .25rem;
+                 width: 40%;
+              margin-right: 0;
+  }
+  .from-pwd{
+
+                width: 62%
+
+   }
+   .from-yzm{width: 40%;}
+   #canvas{
+    width: 22.2%;
+    position: absolute;
+    top: 124.8%;
+    left: 40%;
+    cursor: pointer;
+}
+  .btn-block:hover{
+      cursor:pointer;
+  }
+  .Ribbon{
+    width: 60%;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    position: absolute;
+    left: 20%;
+    top: 201%;
+}
+.btn-block1 {
+    background: #ffffff7a;
+    line-height: 2.8;
+    color: #333;
+}
+.zc{
+    text-align:center;
+    text-decoration: none;
+    color:#6c757d;
+    font-size: 1.075rem!important;
+    font-weight: 700!important;
+}
+.si{
+        font-family: simple-line-icons;
+        speak: none;
+        font-style: normal;
+        font-weight: 400;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+     }
+     .si-emoticon-smile:before {
+            content: "\E021";
+}
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+.canvas1{
+
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #333;
+    border-radius: .25rem;
+    margin-left: 10%;
+    margin-top: 3%;
+    position: absolute;
+    width: 25%;
+    height: 24%;
+    left: 45%;}
+
+@media only screen and (max-width:800px){
+				.reg{
+                width: 60%;
+                left:20%;
+                    }
+
+			}
+			.imgBox{
+			width:100%;
+			height:100%;
+		   background: url(img.png) no-repeat;
+		        overflow: hidden;
+			}
+@media only screen and (max-width:600px){
+                    .canva, .form-username, .form-control, .from-pwd, .btn-block, .from-yzm, .from-select, #canvas{
+    #background: #f0f3f8;
+    height: 60px;
+    font-size: 1em;
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #333;
+    border-radius: .25rem;
+    margin-left: 10%;
+    margin-top: 3%;}
+    .btn-block{
+    background:#0665d0}
+    .canvas1{
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #333;
+    border-radius: .25rem;
+    margin-left: 10%;
+    margin-top: 3%;
+    position: absolute;
+    width: 25%;
+    height: 24%;
+    left: 55%;}
+            .canva,.form-username,.from-pwd,.btn-block,.from-yzm{
+                      width:80%;
+                      left:10%;
+            }
+            .imgBox{display:none}
+           .form-control{width:80%;}
+           .from-select{width:20%;
+           left:60%;}
+           .submit{background:red}
+           .Ribbon {
+    width: 60%;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    position: absolute;
+    left: 20%;
+.canvas1 {
+    background: url(../sunck/code/);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #333;
+    border-radius: .25rem;
+    margin-left: 10%;
+    margin-top: 3%;
+    position: absolute;
+    width: 25%;
+    height: 24%;
+    left: 55%;}
+}
+#canvas {
+    width: 40.2%;
+    position: absolute;
+    top: 114.5%;
+    left: 40%;
+    cursor: pointer;
+}
+.reg{
+      width: 100%;
+      left:0;
+                    }
+
+
+

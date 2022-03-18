@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{% static 'font-awesome-4.7.0/css/font-awesome.css' %}" rel="stylesheet" />
+    <link href="{% static 'index.css'  %}"  rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+header {
+    width: 100%;
+    height: 10%;
+    border: 1px red solid;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    flex-direction: initial;
+    align-items: center;
+    font-size: 1.2em;
+
+    flex-grow: 0;
+}
+header>div>a {
+    text-decoration: none;
+    color: #333;
+}
+
+.user > .yhm, .logout>a {
+    color: #4C98F7;
+    cursor: pointer;
+    text-decoration: none;
+}
+section {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    flex-direction: initial;
+    align-items: center;
+    font-size: 1.2em;
+    width: 100%;
+    height: 100%;
+}
+.list {
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2em;
+    width: 21%;
+    height: 100%;
+}
+.list1 {
+    width: 100%;
+    height: 13%;
+}
+.file {
+    border: 1px solid red;
+    width: 79%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+.G1{
+display:none;
+}
+#list2 {
+    width: 100%;
+    height: 30%;
+    border: 1px solid red;
+}
+p {
+    color: #4C98F7;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+.text {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: initial;
+}
+.container {
+    width: 100%;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 20px;
+   }
+   .skills {
+    line-height: 30px;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+    width:30%;
+    margin-top: -30px;
+   }
+   .up {
+    width: 100%;
+    height: 13%;
+    border: 1px solid red;
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    flex-direction: initial;
+    align-items: center;
+}
+.picpath1 {
+    width: 10%;
+    color: #00d4ff;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid #333;
+    height: 80%;
+    display: flex;
+    text-align: center;
+    flex-direction: initial;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1%;
+}
+.upfile {
+    margin: 0;
+    padding: 0;
+}
+
+.newfile {
+    display: inline-block;
+    width: 7%;
+    color: #00d4ff;
+    cursor: pointer;
+    text-decoration: none;
+}
+.picpath1>a {
+    color: #4C98F7;
+    cursor: pointer;
+    text-decoration: none;
+}
+.vav2 {
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    flex-direction: initial;
+    align-items: center;
+    border: 1px solid red;
+    width: 100%;
+}
+.body_bg {
+    background-image: url(https://api.ixiaowai.cn/api/api.php);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    filter: blur(2.2px);
+    width: 100%;
+    z-index: -1;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+div#div_body {
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+#hidden{display:none}
+.list_file {
+    float: left;
+
+    margin-right: -100%;
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.list_file>a{color: #ff007a;}
+input[type=checkbox] {
+
+    margin: 4px 0 0 4px;
+    margin-right: 20px;
+    line-height: normal;
+    width:20px;
+    height:20px;
+    border-re
+
+}
+.menu {
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+.botton-select {
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+}
+.botton_1 {
+    margin-right: 4%;
+    background: rgb(255 255 255 / 10%);
+    color: #0095ff;
+    border-radius: 10%;
+    margin-left: 4%;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+.renname{display:none;}
+</style>
+<body>
+<div class="body_bg"></div>
+<header>
+         <div class="hove">
+             <a href="#">全村的希望</a>
+         </div>
+         <div class="user">
+
+             <div class="yhm">欢迎,{{request.session.name}}<i class="fa fa-fw fa-angle-down ml-1"></i>
+             <i class='fa fa-angle-up hidden'></i>
+             </div>
+
+         </div>
+        <div class="logout">
+                <a href="{% url 'myapp:logout'%}">退出登录</a>
+         </div>
+  </header>
+<section>
+<div class="list">
+    <div class="list1">
+        <p>个人信息</p>
+        <p onclick="display()">
+            空间明细
+            <i class="fa fa-fw fa-angle-down ml-1" id="fa-angle-down"></i>
+             <i class='fa fa-angle-up' id="hidden"></i>
+        </p>
+    </div>
+    <div class="G1" id="list2">
+        {%for use1 in use %}
+        <p class="text"><span>已使用容量/总容量</span>
+           <span id="data">{{use1.Usedspace}}G/{{use1.capacity}}G</span>
+        </p>
+        {%endfor%}
+        <div class="container" id="container"></div>
+        <div class="skills loading" id="skills">{{width}}%</div>
+        {%if width >= 80 %}
+        <style>
+            .skills{background:red}
+        </style>
+        {%elif width >= 60 and width < 80 %}
+         <style>
+            .skills{background:yellow}
+         </style>
+        {% else %}
+        <style>
+            .skills{ background-color: #4CAF50;}
+        </style>
+        {%endif%}
+    </div>
+    <script type="text/javascript">
+                 function display() {
+                    var traget=document.getElementById('list2');
+                    var down=document.getElementById("fa-angle-down");
+                    var hidden=document.getElementById("hidden");
+                    //var width = {% widthratio use.Usedspace use.capacity 1%};
+                        if(traget.style.display=="none") {
+                            traget.style.display = 'block';
+                            down.style.display = 'none';
+                            hidden.style.display = 'inline';
+                            document.getElementById("skills").style.width="{{width}}%";
+                            //document.getElementById("container").innerHTML="";
+                        }else{
+                              traget.style.display = 'none';
+                              hidden.style.display = 'none';
+                              down.style.display = 'inline';
+                              }
+                        }
+
+    </script>
+
+</div>
+<div class="file">
+<nav class="up">
+    <div onclick="document.form1.picpath.click()" class="picpath1 botton_1"><p class="upfile" >上传文件</p></div>
+    <form name="form1" action="{%url 'myapp:upfile' %}" method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+　<input type="file" name="picpath" id="picpath" style="display:none;" onChange="document.form1.path.value=this.value">
+        <input type="submit" value="提交" class="botton_1"/>
+    </form>
+    <!--{%url 'myapp:New_folder'%}-->
+    <div class="picpath1 botton_1" id="div_add" ><a href="#">新建文件夹</a></div>
+    <div>
+
+    </div>
+    {% if request.session.msg == "当前路径已存在新创建的文件夹名称，请重新命名"%}
+            <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
+    {%elif msg == "请选择文件后，再次上传"%}
+        <script language="javascript">
+            alert("{{request.session.msg}}");
+            window.history.back(-1);
+            sessionStorage.setItem("msg","1");
+        </script>
+        {{request.session.msg}}
+    {%elif msg == "该路径下有相同的文件，请修改文件名后再次上传"%}
+         <script language="javascript">
+            alert("{{request.session.msg}}")
+            window.history.back(-1);
+            sessionStorage.setItem("msg","1");
+        </script>
+    {{request.session.msg}}
+    {% elif request.session.msg == "请输入新文件夹名称" %}
+    <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
+    {% elif request.session.msg == "文件夹名称中不能包含.等特殊字符" %}
+    <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
+    {% elif request.session.msg == "请选择文件夹或文件" %}
+    <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
+    {%else%}
+    {{msg}}
+     {%endif%}
+</nav>
+<div class="vav2">
+
+    <p>位置:
+        {% if request.GET.folder == None or request.GET.folder == ""%}
+        {{request.session.name}}
+        {%else%}
+        {{request.GET.folder}}
+        {%endif%}
+
+    </p>
+</div>
+<form action="" method="post" name="menu" class="menu">
+    {% csrf_token %}
+<div class="file_list" id="div_body">
+
+   {% comment %}展示文件夹{%endcomment%}
+    <div>
+ {%if request.GET.folder == None or request.GET.folder == ""%}
+ {%else%}
+        <p type=button value="Previous Page" onClick="javascript:history.go(-1);" class="Previous list_file">../</p></br>
+        <style>
+            .Previous{
+            display:block;
+            }
+        </style>
+ {% endif %}
+
+    {%for folder1 in folder  %}
+        {% if folder1.file_is_folder == request.session.fileisfolder %}
+
+        <P class="list_file"><input id="checkbox1" name="checkbox1" type="checkbox" value="{{folder1.File}}"><a href="{%url 'myapp:index' %}?folder={{folder1.file_is_folder}}\{{folder1.File}}">{{folder1.File}}</a></P></br>
+        {%endif%}
+    {%endfor%}
+    </div>
+<div id="adduse" style="display:none">
+       <p>
+          请输入新建文件夹名称:
+          <input type="text" name="folder_name" placeholder="新建文件夹" maxlength="45">
+          <button id="save" onclick="New_folder()" class="botton_2">保存</button>
+          <input type="button" value="取消" id="cancle"  class="botton_2"/>
+       </p>
+</div>
+   <div>
+    {%for folder2 in folder2 %}
+       {% if folder2.file_is_folder == request.session.fileisfolder %}
+   <P class="list_file" ><input id="checkbox2" name="checkbox2" type="checkbox" value="{{folder2.File}}文件"><a href="{%url 'myapp:upfile' %}{{folder2.file_is_folder}}/{{folder2.File}}">{{folder2.File}}</a></P>
+       </br>
+
+
+       {% endif %}
+    {%endfor%}
+    </div>
+    <div id="renname" class="renname">
+          <input type="text" name="folder_name1" placeholder="请输入新文件(夹)名称" maxlength="45">
+          <button id="save1" onclick="rename()" class="botton_2" >确认修改</button>
+    </div>
+        <div class="botton-select"><button id="delte" type="submit" value="" onclick="Delete()" class="botton_1">删除</button>
+        <div id="botton_1" class="botton_1" type="submit" value="" onclick="renname1()">重命名</div>
+<script type="text/javascript">
+                 function renname1() {
+                    var traget=document.getElementById('renname');
+                    var checkbox1 = document.getElementById('checkbox1');
+                    var checkbox2 = document.getElementById('checkbox2');
+                    var radio1 = document.getElementsByName('checkbox1');
+                    var radio2 = document.getElementsByName('checkbox2');
+                    var Delete = document.getElementById('delte');
+                    document.getElementById("botton_1").innerHTML="取消重命名";
+                    if(traget.style.display=="none") {
+                            traget.style.display = 'block';
+                            Delete.style.display = 'none';
+
+                            for (i=0;i < radio1.length;i++){
+                            radio1[i].type='radio';
+                            }
+                            for (b=0;b <= radio2.length;b++){
+                            radio2[b].type='radio';
+                            radio2[b].name='checkbox1';
+                    }
+
+                    }else{
+                              document.getElementById("botton_1").innerHTML="重命名";
+                              traget.style.display = 'none';
+                              Delete.style.display = 'block';
+                              for (c=0;c < radio1.length;c++){
+                            radio1[c].type='checkbox';
+                            }
+                            for (d=0;d < radio2.length;d++){
+                            radio2[d].type='checkbox';
+                            radio2[d].name='checkbox2';
+
+                            }
+
+                              }
+                    }
+
+    </script>
+        </div>
+{% comment %}
+    <script type="text/javascript">
+        function Delete(){
+        document.menu.method="post";
+        document.menu.action="{%url 'myapp:Delete'%}";
+        document.menu.submit();
+        }
+        function rename(){
+        document.menu.method="post";
+        document.menu.action="{%url 'myapp:rename'%}";
+        document.menu.submit();
+        return true;
+        }
+        function New_folder(){
+        document.menu.method="post";
+        document.menu.action="{% url 'myapp:New_folder' %}";
+        document.menu.submit();
+        return true;}
+        var botton_1=document.getElementById('botton_1');
+        botton_1.style.display="block"
+        var checkbox1 = document.getElementsByName("checkbox1");
+        var checkbox2 = document.getElementsByName("checkbox2");
+        if(checkbox1.checked >= 2 ){
+            botton_1.style.display="None"
+        }else{
+         botton_1.style.display="block"
+        }
+
+    </script>
+    {% endcomment %}
+</div>
+</form>
+<script>
+    $("#div_add").click(function() {
+            $('#adduse').show();
+        })
+        $("#cancle").click(function() {
+            $('#adduse').hide();
+        })
+        $("#save").click(function() {
+            $('#adduse').hide();
+            $("#div_body").append("正在新建文件夹")
+        })
+
+        /* 删除 */
+        function delRow(obj) {
+            $(obj).parent().remove();
+            alert("删除成功")
+        }
+</script>
+</div>
+
+
+</section>
+</body>
+</html>
