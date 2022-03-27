@@ -54,14 +54,7 @@ def index(request):
         if logo == True:
             folder = T_File.objects.filter(username_id=username, myfile="文件夹",is_del=False,File_Available=True)
             folder2 = T_File.objects.filter(username_id=username,is_del=False,File_Available=True ).exclude(myfile="文件夹")
-            # for x in range(len(folder)):
-            #     if folder[x].file_is_folder == None or folder[x].file_is_folder == "":
-            folder_1=T_File.objects.filter(username_id=username, myfile="文件夹",is_del=False,File_Available=True,file_is_folder=request.session["fileisfolder"])
-            folder2_2 = T_File.objects.filter(username_id=username, is_del=False, File_Available=True,file_is_folder=request.session["fileisfolder"]).exclude(myfile="文件夹")
-            if folder_1 or folder2_2:
-                folder3=1
-            else:
-                folder3 = 0
+
             user2 = T_User.objects.get(username=username)
             Usedspace = decimal.Decimal(user2.Usedspace).quantize(decimal.Decimal("0.000"))
             capacity = decimal.Decimal(user2.capacity).quantize(decimal.Decimal("0.000"))
@@ -70,43 +63,7 @@ def index(request):
             user1 = T_User.objects.filter(username=username)
             request.session['login_from'] = request.META.get('HTTP_REFERER', '/index/' + "?folder=" + fileisfolder)
             return render(request, 'index.html',{"username": username, "use": user1, "width": a1, "file_is_folder": fileisfolder,
-                           "folder": folder, "folder2": folder2,"folder3": folder3,})
-        else:
-            return render(request, "user.html", {"msg": "数据异常，请先登录", "form": user_from})
-    else:
-        return render(request, "user.html", {"msg": "数据异常，请重新登录", "form": user_from})
-def rename1(request):
-    user_from = UserLoginForm(request.POST)
-    username = request.session.get("name")
-    paswd = request.session.get("pawsd")
-    use = T_User.objects.filter(username=username)
-    for x in range(len(use)):
-        pwd = use[x].password
-        logo = check_password(paswd, pwd)
-    fileisfolder = request.GET.get("folder")
-    if fileisfolder == None or fileisfolder == "":
-        fileisfolder = str(username)
-    else:
-        fileisfolder = str(request.GET.get("folder"))
-    request.session["fileisfolder"] = fileisfolder
-    if use:
-        if logo == True:
-            folder = T_File.objects.filter(username_id=username, myfile="文件夹", is_del=False, File_Available=True)
-            folder2 = T_File.objects.filter(username_id=username, is_del=False, File_Available=True).exclude( myfile="文件夹")
-            folder_1 = T_File.objects.filter(username_id=username, myfile="文件夹", is_del=False, File_Available=True,file_is_folder=request.session["fileisfolder"])
-            folder2_2 = T_File.objects.filter(username_id=username, is_del=False, File_Available=True,file_is_folder=request.session["fileisfolder"]).exclude(myfile="文件夹")
-            if folder_1 or folder2_2:
-                folder3 = 1
-            else:
-                folder3 = 0
-            user2 = T_User.objects.get(username=username)
-            Usedspace = decimal.Decimal(user2.Usedspace).quantize(decimal.Decimal("0.000"))
-            capacity = decimal.Decimal(user2.capacity).quantize(decimal.Decimal("0.000"))
-            width = (Usedspace / capacity * 100)
-            a1 = decimal.Decimal(width).quantize(decimal.Decimal("0.000"))
-            user1 = T_User.objects.filter(username=username)
-            request.session['login_from'] = request.META.get('HTTP_REFERER', '/rename1/' + "?folder=" + fileisfolder)
-            return render(request, 'renname.html',{"username": username, "use": user1, "width": a1, "file_is_folder": fileisfolder,"folder": folder, "folder2": folder2,"folder3":folder3})
+                           "folder": folder, "folder2": folder2})#,"folder3":folder3
         else:
             return render(request, "user.html", {"msg": "数据异常，请先登录", "form": user_from})
     else:
@@ -357,7 +314,7 @@ def upfile(request):
                 request.session["msg"] = "请选择文件后，再次上传"
                 return render(request, 'index.html',{'name': username, "msg": "请选择文件后，再次上传", "use": user1, "width": a1,"file_is_folder": fileisfolder, "folder": folder, "folder2": folder2})
             else:
-                ext = file.name.split('.')[-1]
+                ext = file.name.split('.')[-1].lower()
                 file_size = round((float(file.size) / 1073741824), 3)
                 filepath = BASE_DIR.joinpath(settings.MDEIA_ROOT)
                 filepath1 = str(filepath) + "\\" + fileisfolder + "\\" + file.name
@@ -552,45 +509,39 @@ def rename(request):
         file_point="."
         use=T_User.objects.filter(username=username)
         if use:
-            if folder_name1 == None or folder_name1 == "":
-                if fileisfolder == None or fileisfolder == "":
-                    fileisfolder = str(username)
-                else:
-                    fileisfolder = request.session.get("fileisfolder")
-                request.session["fileisfolder"] = fileisfolder
-                request.session['login_from'] = request.META.get('HTTP_REFERER', '/index/' + "?folder=" + fileisfolder)
-                request.session['msg'] = "请输入新文件夹名称"
-                return HttpResponseRedirect(request.session['login_from'])
-            elif checkbox1== None or folder_name1 == "":
-                if fileisfolder == None or fileisfolder == "":
-                    fileisfolder = str(username)
-                else:
-                    fileisfolder = request.session.get("fileisfolder")
-                request.session["fileisfolder"] = fileisfolder
-                request.session['login_from'] = request.META.get('HTTP_REFERER', '/index/' + "?folder=" + fileisfolder)
-                request.session['msg'] = "请选择需要重命名的文件或文件夹"
-                return HttpResponseRedirect(request.session['login_from'])
-            elif file_name in checkbox1 and file_point in checkbox1:
+            if file_name in checkbox1 and file_point in checkbox1:
                 checkbox2=request.POST.get('checkbox1')[:-2]
-                ext = checkbox1.split('.')[-1][:-2]
+                ext = checkbox1.split('.')[-1].lower()[:-2]
                 t_file=T_File.objects.filter(File=checkbox2,myfile=ext,file_is_folder=fileisfolder,is_del=False,File_Available=True)
                 if t_file:
-                    if file_point in folder_name1:
+                    if folder_name1 == None or folder_name1 == "":
+                        print(folder_name1)
+                        if fileisfolder == None or fileisfolder == "":
+                            fileisfolder = str(username)
+                        else:
+                            fileisfolder = request.session.get("fileisfolder")
+                        request.session["fileisfolder"] = fileisfolder
+                        request.session['login_from'] = request.META.get('HTTP_REFERER','/index/' + "?folder=" + fileisfolder)
+                        request.session['msg'] = "请输入新文件夹名称"
+                        return HttpResponseRedirect(request.session['login_from'])
+                    elif file_point in folder_name1:
                         filepath = BASE_DIR.joinpath(settings.MDEIA_ROOT)
                         path = str(filepath) + "\\" + str(fileisfolder)+"\\"+str(checkbox1)
                         path1=str(filepath) + "\\" + str(fileisfolder)
                         path2= str(filepath) + "\\" + str(fileisfolder)+"\\"+str(folder_name1)
                         if folder_name1 in os.listdir(path1):
-                            request.session['msg'] = "当前路径已存在新创建的文件名称，请重新命名"
+                            request.session['msg'] = "当前路径已存在新创建的文件夹名称，请重新命名"
                             return HttpResponseRedirect(request.session['login_from'])
                         else:
                             os.chdir(path1)
                             os.rename(path[:-2],path2)
-                            ext1 = folder_name1.split('.')[-1]
-                            for x in range(len(t_file)):
-                                t_file[x].File = folder_name1
-                                t_file[x].myfile = ext1
-                                t_file[x].save()
+                            ext1 = folder_name1.split('.')[-1].lower()
+                            t_file1=T_File.objects.get(File=checkbox2)
+                            t_file1.File = folder_name1
+                            t_file1.myfile = ext1
+                            print(t_file1)
+                            t_file1.save()
+
                             if fileisfolder == None or fileisfolder == "":
                                 fileisfolder = str(username)
                             else:
@@ -608,83 +559,14 @@ def rename(request):
                         request.session["fileisfolder"] = fileisfolder
                         request.session['login_from'] = request.META.get('HTTP_REFERER','/index/' + "?folder=" + fileisfolder)
                         return HttpResponseRedirect(request.session['login_from'])
-                else:
-                    request.session['msg'] = "请重新选择文件，再来重命名"
-                    if fileisfolder == None or fileisfolder == "":
-                        fileisfolder = str(username)
-                    else:
-                        fileisfolder = request.session.get("fileisfolder")
-
-                    request.session["fileisfolder"] = fileisfolder
-                    request.session['login_from'] = request.META.get('HTTP_REFERER','/index/' + "?folder=" + fileisfolder)
-                    return HttpResponseRedirect(request.session['login_from'])
-
             else:
-                checkbox2 = request.POST.get('checkbox1')
-                file_point = "."
                 t_file = T_File.objects.filter(File=checkbox1, myfile="文件夹", file_is_folder=fileisfolder, is_del=False,File_Available=True)
                 if t_file:
-                    if file_point not in folder_name1:
-                        filepath = BASE_DIR.joinpath(settings.MDEIA_ROOT)
-                        path = str(filepath) + "\\" + str(fileisfolder) + "\\" + str(checkbox1)
-                        path1 = str(filepath) + "\\" + str(fileisfolder)
-                        path3 = str(fileisfolder) + "\\" + str(checkbox1)
-                        path4 = str(fileisfolder) + "\\" + str(folder_name1)
-                        path2 = str(filepath) + "\\" + str(fileisfolder) + "\\" + str(folder_name1)
-                        if folder_name1 in os.listdir(path1):
-                            request.session['msg'] = "当前路径已存在新创建的文件名称，请重新命名"
-                            return HttpResponseRedirect(request.session['login_from'])
-                        else:
-                            os.chdir(path1)
-                            os.rename(path, path2)
-                            ext1 = "文件夹"
-                            for x in range(len(t_file)):
-                                t_file[x].File = folder_name1
-                                t_file[x].myfile = ext1
-                                t_file[x].save()
-                            t_file2 = T_File.objects.filter(file_is_folder=path3)
-                            t_file3=T_File.objects.filter(file_is_folder__contains=path3,username=username).exclude(file_is_folder=path3)
-
-                            if t_file3:
-                                for x in range(len(t_file3)):
-                                    File_Is_Folder_Old=t_file3[x].file_is_folder
-                                    File_Is_Folder_Old_2=File_Is_Folder_Old.split(path3)[-1]
-                                    File_Is_Folder_Old_3=path4+File_Is_Folder_Old_2
-                                    t_file3[x].file_is_folder = File_Is_Folder_Old_3
-                                    t_file3[x].save()
-                            if t_file2:
-                                for x in range(len(t_file2)):
-                                    t_file2[x].file_is_folder = path4
-                                    t_file2[x].save()
-                            if fileisfolder == None or fileisfolder == "":
-                                fileisfolder = str(username)
-                            else:
-                                fileisfolder = request.session.get("fileisfolder")
-                            request.session["fileisfolder"] = fileisfolder
-                            request.session['login_from'] = request.META.get('HTTP_REFERER', '/index/' + "?folder=" + fileisfolder)
-                            return HttpResponseRedirect(request.session['login_from'])
-                    else:
-                        if fileisfolder == None or fileisfolder == "":
-                            fileisfolder = str(username)
-                        else:
-                            fileisfolder = request.session.get("fileisfolder")
-                        request.session["fileisfolder"] = fileisfolder
-                        request.session['login_from'] = request.META.get('HTTP_REFERER','/index/' + "?folder=" + fileisfolder)
-                        request.session['msg'] = "文件夹名称中不能包含.等特殊字符"
-                        return HttpResponseRedirect(request.session['login_from'])
-
-                else:
-                    request.session['msg'] = "请重新选择文件夹，再来重命名"
-                    if fileisfolder == None or fileisfolder == "":
-                        fileisfolder = str(username)
-                    else:
-                        fileisfolder = request.session.get("fileisfolder")
-
-                    request.session["fileisfolder"] = fileisfolder
-                    request.session['login_from'] = request.META.get('HTTP_REFERER','/index/' + "?folder=" + fileisfolder)
-                    return HttpResponseRedirect(request.session['login_from'])
+                    print(2,checkbox1)
+            return HttpResponseRedirect(request.session['login_from'])
         else:
             return redirect(reverse("myapp:user"))
+
     else:
         return HttpResponseRedirect(request.session['login_from'])
 

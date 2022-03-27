@@ -18,6 +18,5 @@ urlpatterns = [
 	url(r'^New_folder/$',views.New_folder,name="New_folder"),
 	url(r'^Delete/$',views.Delete,name="Delete"),
 	url(r'^rename/$',views.rename,name="rename"),
-	url(r'^rename1/$',views.rename1,name="renname1"),
 	re_path(r'upfile/(?P<path>.*)$',serve,{'document_root':settings.MDEIA_ROOT}),
 ]

@@ -1,16 +1,14 @@
 
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    {% block title %}
-    <title>首页</title>
+    <title>Title</title>
     <link href="{% static 'font-awesome-4.7.0/css/font-awesome.css' %}" rel="stylesheet" />
     <link href="{% static 'index.css'  %}"  rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {% endblock title %}
 </head>
 <style>
 html, body {
@@ -23,7 +21,7 @@ html, body {
 header {
     width: 100%;
     height: 10%;
-    border-bottom: 1px rgb(9 246 184 / 34%) solid;
+    border: 1px red solid;
     display: flex;
     text-align: center;
     justify-content: space-between;
@@ -60,15 +58,15 @@ section {
     flex-direction: column;
     align-items: center;
     font-size: 1.2em;
-    min-width: 25%;
+    width: 21%;
     height: 100%;
 }
 .list1 {
     width: 100%;
-    min-height: 13%;
+    height: 13%;
 }
 .file {
-    border-left: 1px solid rgb(7 246 155 / 71%);
+    border: 1px solid red;
     width: 79%;
     height: 100%;
     display: flex;
@@ -82,8 +80,8 @@ display:none;
 }
 #list2 {
     width: 100%;
-    min-height: 18%;
-    #border: 1px solid red;
+    height: 30%;
+    border: 1px solid red;
 }
 p {
     color: #4C98F7;
@@ -99,7 +97,7 @@ p {
 .container {
     width: 100%;
     height: 30px;
-    background-color: #0bbced8a;
+    background-color: #ddd;
     border-radius: 20px;
    }
    .skills {
@@ -113,7 +111,7 @@ p {
    .up {
     width: 100%;
     height: 13%;
-    border-bottom: 1px solid rgb(7 246 155 / 71%);
+    border: 1px solid red;
     display: flex;
     text-align: center;
     justify-content: flex-start;
@@ -154,10 +152,10 @@ p {
 .vav2 {
     display: flex;
     text-align: center;
-    justify-content: space-between;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    border-bottom: 1px solid red;
+    justify-content: flex-start;
+    flex-direction: initial;
+    align-items: center;
+    border: 1px solid red;
     width: 100%;
 }
 .body_bg {
@@ -178,18 +176,18 @@ div#div_body {
     justify-content: space-evenly;
     flex-direction: column;
     align-items: flex-start;
-    min-width: 51%;
+    width: 100%;
 }
 #hidden{display:none}
 .list_file {
     float: left;
+
+    margin-right: -100%;
     display: flex;
     text-align: center;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: space-evenly;
+    align-items: flex-start;
     flex-wrap: nowrap;
-    margin: 0;
-    width: 100%;
 }
 .list_file>a{color: #ff007a;}
 input[type=checkbox] {
@@ -205,12 +203,10 @@ input[type=checkbox] {
 .menu {
     display: flex;
     text-align: center;
-    justify-content: space-around;
-    flex-direction: row;
+    justify-content: space-evenly;
+    flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    align-content: flex-start;
-    flex-wrap: nowrap;
 }
 .botton-select {
     display: flex;
@@ -219,7 +215,6 @@ input[type=checkbox] {
     flex-direction: row;
     align-items: flex-start;
     width: 100%;
-    margin-left: -30%;
 }
 .botton_1 {
     margin-right: 4%;
@@ -230,40 +225,7 @@ input[type=checkbox] {
     border: 1px solid #333;
     cursor: pointer;
 }
-.botton_2 {
-    margin-left: 0;
-    margin-top: 2%;
-    background: #00c4ff2e;
-    border-radius: 0%;
-}
 .renname{display:none;}
-.time {
-    width: 70%;
-    display: flex;
-    flex-wrap: nowrap;
-    align-content: center;
-    align-items: stretch;
-    justify-content: space-evenly;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-}
-p.time_p {
-    margin: 0;
-}
-p.list_file1 {
-    width: 100%;
-    margin: 0;
-}
-.list_file2 {
-    margin: 0;
-}
-.msg1{display:none;
-color:red;
-}
-p {
-     margin: 0;
-}
 </style>
 <body>
 <div class="body_bg"></div>
@@ -341,7 +303,7 @@ p {
     <div onclick="document.form1.picpath.click()" class="picpath1 botton_1"><p class="upfile" >上传文件</p></div>
     <form name="form1" action="{%url 'myapp:upfile' %}" method="post" enctype="multipart/form-data">
          {% csrf_token %}
-　<input type="file" name="picpath" id="picpath" style="display:none;" onChange="document.form1.path.value=this.value" >
+　<input type="file" name="picpath" id="picpath" style="display:none;" onChange="document.form1.path.value=this.value">
         <input type="submit" value="提交" class="botton_1"/>
     </form>
     <!--{%url 'myapp:New_folder'%}-->
@@ -371,12 +333,6 @@ p {
     <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
     {% elif request.session.msg == "请选择文件夹或文件" %}
     <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
-    {% elif request.session.msg == "请重新选择文件，再来重命名" %}
-    <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
-    {% elif request.session.msg == "请选择需要重命名的文件或文件夹" %}
-    <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
-    {% elif request.session.msg == "文件名称中需要包含.等特殊字符" %}
-    <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
     {%else%}
     {{msg}}
      {%endif%}
@@ -398,25 +354,20 @@ p {
 
    {% comment %}展示文件夹{%endcomment%}
     <div>
-
- {%if request.GET.folder == None or request.GET.folder == "" or request.GET.folder == request.session.name %}
-        <P class="list_file2">文件名</p>
+ {%if request.GET.folder == None or request.GET.folder == ""%}
  {%else%}
         <p type=button value="Previous Page" onClick="javascript:history.go(-1);" class="Previous list_file">../</p></br>
         <style>
             .Previous{
             display:block;
-            width:0
             }
         </style>
-        <P class="list_file2">文件名</p>
-
  {% endif %}
-        <p class="msg1">该文件夹暂无文件，请上传后重新进入</p>
 
     {%for folder1 in folder  %}
         {% if folder1.file_is_folder == request.session.fileisfolder %}
-        <P class="list_file">{% block input %}<input id="checkbox1" name="checkbox1" type="checkbox" value="{{folder1.File}}"><a href="{%url 'myapp:index' %}?folder={{folder1.file_is_folder}}\{{folder1.File}}">{{folder1.File}}</a>{% endblock input %}</P></br>
+
+        <P class="list_file"><input id="checkbox1" name="checkbox1" type="checkbox" value="{{folder1.File}}"><a href="{%url 'myapp:index' %}?folder={{folder1.file_is_folder}}\{{folder1.File}}">{{folder1.File}}</a></P></br>
         {%endif%}
     {%endfor%}
     </div>
@@ -431,7 +382,7 @@ p {
    <div>
     {%for folder2 in folder2 %}
        {% if folder2.file_is_folder == request.session.fileisfolder %}
-   <P class="list_file" >{% block input2 %}<input id="checkbox2" name="checkbox2" type="checkbox" value="{{folder2.File}}文件"><a href="{%url 'myapp:upfile' %}{{folder2.file_is_folder}}/{{folder2.File}}">{{folder2.File}}</a>{% endblock input2 %}</P>
+   <P class="list_file" ><input id="checkbox2" name="checkbox2" type="checkbox" value="{{folder2.File}}文件"><a href="{%url 'myapp:upfile' %}{{folder2.file_is_folder}}/{{folder2.File}}">{{folder2.File}}</a></P>
        </br>
 
 
@@ -442,12 +393,48 @@ p {
           <input type="text" name="folder_name1" placeholder="请输入新文件(夹)名称" maxlength="45">
           <button id="save1" onclick="rename()" class="botton_2" >确认修改</button>
     </div>
-        {% block del %}
-    <div class="botton-select">
-        <button id="delte" type="submit" value="" onclick="Delete()" class="botton_1 botton_2">删除</button>
-        <div id="botton_1" class="botton_1 botton_2" type="submit" value="" onclick="renname1()"><a href="{% url 'myapp:renname1' %}?folder={{request.session.fileisfolder}}">重命名</a></div>
-    </div>
-    {% endblock del %}
+        <div class="botton-select"><button id="delte" type="submit" value="" onclick="Delete()" class="botton_1">删除</button>
+        <div id="botton_1" class="botton_1" type="submit" value="" onclick="renname1()">重命名</div>
+<script type="text/javascript">
+                 function renname1() {
+                    var traget=document.getElementById('renname');
+                    var checkbox1 = document.getElementById('checkbox1');
+                    var checkbox2 = document.getElementById('checkbox2');
+                    var radio1 = document.getElementsByName('checkbox1');
+                    var radio2 = document.getElementsByName('checkbox2');
+                    var Delete = document.getElementById('delte');
+                    document.getElementById("botton_1").innerHTML="取消重命名";
+                    if(traget.style.display=="none") {
+                            traget.style.display = 'block';
+                            Delete.style.display = 'none';
+
+                            for (i=0;i < radio1.length;i++){
+                            radio1[i].type='radio';
+                            }
+                            for (b=0;b <= radio2.length;b++){
+                            radio2[b].type='radio';
+                            radio2[b].name='checkbox1';
+                    }
+
+                    }else{
+                              document.getElementById("botton_1").innerHTML="重命名";
+                              traget.style.display = 'none';
+                              Delete.style.display = 'block';
+                              for (c=0;c < radio1.length;c++){
+                            radio1[c].type='checkbox';
+                            }
+                            for (d=0;d < radio2.length;d++){
+                            radio2[d].type='checkbox';
+                            radio2[d].name='checkbox2';
+
+                            }
+
+                              }
+                    }
+
+    </script>
+        </div>
+{% comment %}
     <script type="text/javascript">
         function Delete(){
         document.menu.method="post";
@@ -472,46 +459,13 @@ p {
         if(checkbox1.checked >= 2 ){
             botton_1.style.display="None"
         }else{
-         botton_1.style.display="inline-block"
+         botton_1.style.display="block"
         }
 
     </script>
-
-</div>
-<div class="time">
-    {%if request.GET.folder == None or request.GET.folder == ""%}
-        <p class="list_file1">文件上传时间</p>
- {%else%}
-        <p type=button value="Previous Page" onClick="javascript:history.go(-1);" class="Previous list_file"></p></br>
-        <style>
-            .Previous{
-            display:block;
-            }
-        </style>
-         <p class="list_file1">文件上传时间</p>
-
- {% endif %}
-
-
-
-    {%for folder1 in folder  %}
-       {% if folder1.file_is_folder == request.session.fileisfolder %}
-   <P class="time_p" >{{folder1.Upload_date|date:"Y-m H:i" }}</P>
-        {% endif %}
-    {%endfor %}
-    {%for folder2 in folder2 %}
-       {% if folder2.file_is_folder == request.session.fileisfolder %}
-   <P class="time_p" >{{folder2.Upload_date|date:"Y-m H:i" }}</P>
-        {%endif%}
-    {% endfor %}
-
-
-
-
-
+    {% endcomment %}
 </div>
 </form>
-
 <script>
     $("#div_add").click(function() {
             $('#adduse').show();
@@ -534,24 +488,5 @@ p {
 
 
 </section>
-
-
-          {% if folder3 == 1%}
-                <style>
-                    .list_file2,.list_file1,.botton-select{display:inline-block;;}
-                    .msg1{
-                    display:none;
-                    }
-                </style>
-          {% else %}
-                <style>
-                    .list_file2,.list_file1,.botton-select{display:none;}
-                    .msg1{
-                    display:block;
-                    }
-                </style>
-            {% endif %}
-
-
 </body>
 </html>
