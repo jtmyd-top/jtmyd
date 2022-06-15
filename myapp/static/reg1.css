@@ -1,3 +1,8 @@
+    html,body{height:100%;
+width:100%;
+margin:0;
+padding:0;
+}
 input::-webkit-input-placeholder {
     font-size:1.2em;
     color: #101010;
@@ -13,7 +18,9 @@ input:-moz-placeholder {
     font-size:1.2em;
     color: #101010;
   }
-
+.user,.email,.password,.password2,.code {
+    position: relative;
+}
 input:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     font-size:1.2em;
@@ -21,92 +28,88 @@ input:-ms-input-placeholder {
   }
 
  .error {
-    position: absolute;
-    top: -12%;
-    left: -1%;
-    z-index: -1;
-    color: red;
-    width: 100%;
-    height: 91%;
+
 }
 .msg {
-    position: absolute;
-    top: 2%;
-    left: 38%;
+
 }
-.p1 {
+
+.p1,.p2,.p3,.p4,.p5 {
     position: absolute;
-    top: 23%;
-    left: 43%;
+    top: 10%;
+    right: 22%;
+    color:red;
+    z-index:-1;
 }
 .p2 {
-    position: absolute;
-    top: 56%;
-    left: 42%;
+display: inline-block;
+    margin-left: -63%;
+    z-index:-1;
 }
 p.p3 {
-    position: absolute;
-    top: 91%;
-    left: 40%;
+display: inline-block;
+    margin-left: -35%;
 }
 .p4 {
-    position: absolute;
-    top: 125%;
-    left: 43%;
+display: inline-block;
+    margin-left: -35%;
 }
 .p5 {
-    position: absolute;
-    top: 160%;
-    left: 40%;
+display: inline-block;
+right:45%;
+
 }
 .p6 {
-    position: absolute;
-    top: 22%;
-    left: 45%;
+
 }
 .p7 {
-    position: absolute;
-    top: 56%;
-    left: 51%;
+
 }
 html{width:100%;
 height:100%;
 }
         body{
      width:100%;
-     height:100%;
+
      background-image:url("https://unsplash.it/1600/900?random");
 
      background-size: cover;
      background-repeat: no-repeat;
      background-position: 50% 50%;
      background-color: #e8eaf2;
-     position:inherit;
-	 top:0;
-     left:0;
-     margin:0;
-     padding:0;
-     }
-     .reg{
-           width: 40%;
-    height:100%;
-    background: #fff;
-     background: rgba(255,255,254,0.5);
-        position: absolute;
-        top: 0;
-        left: 0;
-     }
-     header{
-         width: 80%;
-    position: absolute;
-    top: 0;
-    left: 8%;
 
-    }
+     }
+     .reg {
+    width: 40%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-left: 30%;
+}
+     header {
+    width: 100%;
+    height: 18%;
+    background: rgba(255,255,254,0.5);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: stretch;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+
      header>h1,header>p{
         height:100px;
         text-align: center;
-        line-height: 100px;
+
 
      }
      header>h1>a{
@@ -129,24 +132,35 @@ height:100%;
 			/*开始时候下划线的宽度为0*/
 			width:0;
 			height:3px;
-			position:absolute;
-            left:39.5%;
-			top:70px;
-			/*这里我们设定所有改变都有动画效果，可以自己指定样式才有动画效果*/
-			transition:all 3s ease-in-out;
+
 }
     header>h1>a:hover::before{
             width:129px;
     }
     .from-register{
-
         width: 100%;
-        height: 250px;
-        position: absolute;
-        top: 110px;
-        left: 0;
+        height: 100%;
+        background: rgba(255,255,254,0.5);
+        display: flex;
+        flex-direction: column;
+        align-content: space-around;
+        align-items: stretch;
+        justify-content: space-between;
+
     }
-     .canva,.form-username,.form-control,.from-pwd,.btn-block,.from-yzm,.from-select,#canvas{
+    .email {
+    width: 62%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 18%;
+    margin-top: 1%;
+}
+     .canva,.form-username,.from-pwd,.btn-block,.from-yzm,#canvas{
     background: rgba(253,2,9,0);
     height: 60px;
     font-size: 1em;
@@ -155,7 +169,7 @@ height:100%;
     border: 1px solid #333;
     border-radius: .25rem;
     margin-left: 18%;
-    margin-top: 3%;
+    margin-top: 1%;
 }
 
      .si{
@@ -186,35 +200,55 @@ height:100%;
 
 }
 
- .from-select {
-    position: absolute;
-    left: 40%;
-    width: 22%;
+.from-select {
+    width: 34%;
     border-radius: 0 0.25rem 0.25rem 0;
     color: #5b29e9;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background: rgba(253,2,9,0);
+    font-size: 1em;
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #333;
+    border-radius: .25rem;
 }
   .form-username{
               width: 62%;
 
 
   }
-  .form-control{border-right:none;
-border-radius:.25rem 0 0 .25rem;
-                 width: 40%;
-              margin-right: 0;
-  }
+  .form-control {
+    border-right: none;
+    border-radius: .25rem 0 0 .25rem;
+    width: 66%;
+    margin-right: 0;
+
+    background: rgba(253,2,9,0);
+    font-size: 1em;
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #333;
+    border-radius: .25rem;
+      height: 60px;
+}
   .from-pwd{
 
                 width: 62%
 
    }
-   .from-yzm{width: 40%;}
-   #canvas{
-    width: 22.2%;
-    position: absolute;
-    top: 124.8%;
-    left: 40%;
+ .from-yzm {
+    width: 66%;
+    margin: 0;
+    padding: 0;
+}
+   #canvas {
+    width: 34%;
     cursor: pointer;
+    display: block;
+    padding: 0;
+    margin: 0;
 }
   .btn-block:hover{
       cursor:pointer;
@@ -224,9 +258,7 @@ border-radius:.25rem 0 0 .25rem;
     height: 26px;
     text-align: center;
     line-height: 26px;
-    position: absolute;
-    left: 20%;
-    top: 201%;
+
 }
 .btn-block1 {
     background: #ffffff7a;
@@ -239,6 +271,7 @@ border-radius:.25rem 0 0 .25rem;
     color:#6c757d;
     font-size: 1.075rem!important;
     font-weight: 700!important;
+    margin-top: 0%;
 }
 .si{
         font-family: simple-line-icons;
@@ -263,17 +296,17 @@ border-radius:.25rem 0 0 .25rem;
     border: 1px solid #333;
     border-radius: .25rem;
     margin-left: 10%;
-    margin-top: 3%;
-    position: absolute;
+    margin-top: 1%;
+
     width: 25%;
     height: 24%;
-    left: 45%;}
+    }
 
 @media only screen and (max-width:800px){
-				.reg{
-                width: 60%;
-                left:20%;
-                    }
+				.reg {
+    width: 100%;
+    margin: 0;
+}
 
 			}
 			.imgBox{
@@ -283,16 +316,17 @@ border-radius:.25rem 0 0 .25rem;
 		        overflow: hidden;
 			}
 @media only screen and (max-width:600px){
-                    .canva, .form-username, .form-control, .from-pwd, .btn-block, .from-yzm, .from-select, #canvas{
+
+                    .canva, .form-username, .from-pwd, .btn-block, .from-yzm, .email, #canvas{
     #background: #f0f3f8;
-    height: 60px;
+    min-height: 60px;
     font-size: 1em;
     color: #495057;
     background-clip: padding-box;
     border: 1px solid #333;
     border-radius: .25rem;
     margin-left: 10%;
-    margin-top: 3%;}
+    margin-top: 1%;}
     .btn-block{
     background:#0665d0}
     .canvas1{
@@ -301,17 +335,18 @@ border-radius:.25rem 0 0 .25rem;
     border: 1px solid #333;
     border-radius: .25rem;
     margin-left: 10%;
-    margin-top: 3%;
-    position: absolute;
+    margin-top: 1%;
+
     width: 25%;
     height: 24%;
-    left: 55%;}
-            .canva,.form-username,.from-pwd,.btn-block,.from-yzm{
+   }
+            .email,.canva,.form-username,.from-pwd,.btn-block,.from-yzm{
                       width:80%;
-                      left:10%;
+
             }
             .imgBox{display:none}
-           .form-control{width:80%;}
+           .form-control{width:80%;
+           min-height: 60px;}
            .from-select{width:20%;
            left:60%;}
            .submit{background:red}
@@ -320,8 +355,7 @@ border-radius:.25rem 0 0 .25rem;
     height: 26px;
     text-align: center;
     line-height: 26px;
-    position: absolute;
-    left: 20%;
+
 .canvas1 {
     background: url(../sunck/code/);
     background-repeat: no-repeat;
@@ -331,18 +365,23 @@ border-radius:.25rem 0 0 .25rem;
     border: 1px solid #333;
     border-radius: .25rem;
     margin-left: 10%;
-    margin-top: 3%;
-    position: absolute;
+    margin-top: 1%;
+
     width: 25%;
     height: 24%;
-    left: 55%;}
+   }
 }
-#canvas {
-    width: 40.2%;
-    position: absolute;
-    top: 114.5%;
-    left: 40%;
+.from-yzm {
+    width: 66%;
+    margin: 0;
+    padding: 0;
+}
+   #canvas {
+    width: 34%;
     cursor: pointer;
+    display: block;
+    padding: 0;
+    margin: 0;
 }
 .reg{
       width: 100%;

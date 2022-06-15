@@ -45,7 +45,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -138,6 +138,6 @@ MDEIA_ROOT=BASE_DIR.joinpath(BASE_DIR,'upfile')
 SESSION_ENGINE = 'redis_sessions.session'
 SESSION_REDIS_HOST = '127.0.0.1'
 SESSION_REDIS_PORT = 6379
-SESSION_REDIS_DB = 0
+SESSION_REDIS_DB = 1
 SESSION_REDIS_PASSWORD = 'qaz202019'
 SESSION_REDIS_PREFIX = 'session'

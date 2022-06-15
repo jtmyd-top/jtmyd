@@ -7,9 +7,10 @@
     <title>用户注册</title>
     {% endblock title %}
     <link rel="stylesheet" href="{% static 'simple-line-icons-master/css/simple-line-icons.css' %}"/>
-    <link rel="stylesheet" href="{% static 'reg.css' %}"/>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" href="{% static 'reg1.css' %}"/>
 </head>
-<body>
+<body id="body">
 {% block reg1 %}
    <div class="reg" id="reg1">
 
@@ -22,12 +23,16 @@
             <p>
                     永远相信美好的事情即将发生
             </p>
+
        </header>
-       <form action="{% url 'myapp:register' %}" method="POST" class="from-register" novalidate>
+
+
+       <form class="from-register" novalidate method="post">
            {% csrf_token %}
-           {{register_form.username}}
+           <div class="user">{{register_form.username}}<p id="p1"  class="p1" style="text-align: center"></p></div>
+           <div class="email">
            {{register_form.email}}
-           <select class="from-select" name="email2">
+           <select class="from-select" name="email2" id="id_from-select">
                     <option value="@qq.com">@qq.com</option>
                     <option value="@gmail.com">@gmail.com</option>
                     <option value="@163.com">@163.com</option>
@@ -37,18 +42,16 @@
                     <option value="@outlook.com">@outlook.com</option>
                     <option value="@yeah.net">@yeah.net</option>
                     <option value="@foxmail.com">@foxmail.com</option>
-           </select>
-           {{register_form.password}}
-           {{register_form.password2}}
+           </select><p id="p2" class="p2" style="text-align: center"></p>
+           </div>
+           <div class="password">{{register_form.password}}<p id="p3" class="p3" style="text-align: center"></p></div>
+           <div class="password2">{{register_form.password2}}<p id="p4" class="p4" style="text-align: center"></p></div>
+           <div class="code email">
            {{register_form.code}}
-           <img id="canvas" onclick="changeImg(this);" src="{% url 'myapp:code' %}" alt="" title="点击更换">
-           <script>
-        // 通过changeImg事件来更换图片
-        function changeImg(ths) {
-            ths.src = ths.src + '?';
-            console.log(ths.src);
-        }
-          </script>
+           <img id="canvas" onclick="changeImg(this);" src="{% url 'myapp:code' %}" alt="" title="点击更换"><p id="p5" class="p5" style="text-align: center"></p>
+           <script type="text/javascript" src="{% static 'JS/ajax.js'%}"></script>
+
+          </div>
            {% comment %}
            谷歌验证码
            <script src="//recaptcha.net/recaptcha/api.js"></script>
@@ -60,26 +63,29 @@
             <script  src="{% static 'reg.js' %}" rel="text/javascript"></script>&ndash;&gt;
             {% endcomment %}
 
-           <button type="submit" class="btn btn-block">
+           <button class="btn btn-block" id="Next">
                <span>
                  <i class="si si-emoticon-smile mr-1" ></i>
 <!--                 fa fa-sign-in fa-1x logo-1-->
                  下一步
                </span>
            </button>
-           {%if msg == "请按规则输入表单各项"%}
-           <div class="error">
-               <p class="msg" style="text-align: center"><b>{{ msg }}</b></p>
-               <p class="p1" style="text-align: center">{{ register_form.username.errors.0 }}</p>
-               <p class="p2" style="text-align: center">{{ register_form.email.errors.0 }}</p>
-               <p class="p3" style="text-align: center">{{ register_form.password.errors.0 }}</p>
-               <p class="p4" style="text-align: center">{{ register_form.password2.errors.0 }}</p>
-               <p class="p5" style="text-align: center">{{ register_form.code.errors.0 }}</p>
-           </div>
-           <script type="text/javascript">
-               alert("请按规则输入账户或密码:\n"+"{{ register_form.username.errors.0 }}\n"+"{{ register_form.email.errors.0 }}\n"+"{{ register_form.password.errors.0 }}\n"+"{{ register_form.password2.errors.0 }}\n"+"{{ register_form.code.errors.0 }}")
-           </script>
-           {%endif%}
+
+{% autoescape on %}
+            <script type="text/javascript">
+                var CheckAgain_url="{%url 'myapp:CheckAgain'%}"
+                var email_CheckAgain_url="{%url 'myapp:email_CheckAgain' %}"
+                var code_CheckAgain_url="{%url 'myapp:code_CheckAgain' %}"
+            </script>
+            <script type="text/javascript" src="{% static 'JS/ajax.js'%}"></script>
+
+{% endautoescape  %}
+<!--           {%if msg == "请按规则输入表单各项"%}-->
+<!--           <script type="text/javascript">-->
+<!--               alert("请按规则输入账户或密码:\n"+"{{ register_form.username.errors.0 }}\n"+"{{ register_form.email.errors.0 }}\n"+"{{ register_form.password.errors.0 }}\n"+"{{ register_form.password2.errors.0 }}\n"+"{{ register_form.code.errors.0 }}")-->
+<!--           </script>
+           <p class="msg" style="text-align: center"><b>{{msg}}</b></p>
+           {%endif%}-->
            {% if msg == "用户名或邮箱已被注册"%}
            <p class="msg" style="text-align: center"><b>{{ msg }}</b></p>
            <script type="text/javascript">
@@ -104,6 +110,7 @@
             </script>
             <p class="msg" style="text-align: center"><b>{{ msg }}</b></p>
            {% endif %}
+
       <a href="{% url 'myapp:user' %}" class="zc">
           <div class="btn btn-block  btn-block1">
                  <i class="si si-emoticon-smile mr-1" ></i>
@@ -113,5 +120,6 @@
  </form>
    </div>
 {% endblock reg1 %}
+
 </body>
 </html>

@@ -9,11 +9,13 @@ class T_User(admin.ModelAdmin):
 	search_fields = ['username']
 	list_per_page = 10
 	fields = ['username','name','email',"capacity","login_stop"]
+	relfield_style = "fk - ajax"
 @ admin.register(T_File)
 class T_File(admin.ModelAdmin):
-	list_display = ["File","username","is_del","File_Available","File_size"]
+	list_display = ["File","myfile","username","file_is_folder","Upload_date","is_del","createTime","File_Available","File_size"]
 	list_display_links = ['File']
 	list_filter = ['File']
-	search_fields = ['File']
+	search_fields = ['File',"username__username"]
 	list_per_page = 10
 	fields = ['is_del','File_Available']
+	relfield_style = "fk - ajax"

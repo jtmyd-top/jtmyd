@@ -1,235 +1,27 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    {% block title %}
+    <title>首页</title>
+    {% endblock title %}
     <link href="{% static 'font-awesome-4.7.0/css/font-awesome.css' %}" rel="stylesheet" />
-    <link href="{% static 'index.css'  %}"  rel="stylesheet"/>
+    <link href="{% static 'css/index.css'  %}"  rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{%static 'JS/vue.js'%}" type="text/javascript" charset="utf-8"></script>
+
+
+
 </head>
-<style>
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-}
-header {
-    width: 100%;
-    height: 10%;
-    border: 1px red solid;
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-    flex-direction: initial;
-    align-items: center;
-    font-size: 1.2em;
 
-    flex-grow: 0;
-}
-header>div>a {
-    text-decoration: none;
-    color: #333;
-}
-
-.user > .yhm, .logout>a {
-    color: #4C98F7;
-    cursor: pointer;
-    text-decoration: none;
-}
-section {
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-    flex-direction: initial;
-    align-items: center;
-    font-size: 1.2em;
-    width: 100%;
-    height: 100%;
-}
-.list {
-    display: flex;
-    text-align: center;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1.2em;
-    width: 21%;
-    height: 100%;
-}
-.list1 {
-    width: 100%;
-    height: 13%;
-}
-.file {
-    border: 1px solid red;
-    width: 79%;
-    height: 100%;
-    display: flex;
-    text-align: center;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: center;
-}
-.G1{
-display:none;
-}
-#list2 {
-    width: 100%;
-    height: 30%;
-    border: 1px solid red;
-}
-p {
-    color: #4C98F7;
-    cursor: pointer;
-    text-decoration: none;
-
-}
-.text {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: initial;
-}
-.container {
-    width: 100%;
-    height: 30px;
-    background-color: #ddd;
-    border-radius: 20px;
-   }
-   .skills {
-    line-height: 30px;
-    color: white;
-    border-radius: 20px;
-    text-align: center;
-    width:30%;
-    margin-top: -30px;
-   }
-   .up {
-    width: 100%;
-    height: 13%;
-    border: 1px solid red;
-    display: flex;
-    text-align: center;
-    justify-content: flex-start;
-    flex-direction: initial;
-    align-items: center;
-}
-.picpath1 {
-    width: 10%;
-    color: #00d4ff;
-    cursor: pointer;
-    text-decoration: none;
-    border: 1px solid #333;
-    height: 80%;
-    display: flex;
-    text-align: center;
-    flex-direction: initial;
-    align-items: center;
-    justify-content: center;
-    margin-left: 1%;
-}
-.upfile {
-    margin: 0;
-    padding: 0;
-}
-
-.newfile {
-    display: inline-block;
-    width: 7%;
-    color: #00d4ff;
-    cursor: pointer;
-    text-decoration: none;
-}
-.picpath1>a {
-    color: #4C98F7;
-    cursor: pointer;
-    text-decoration: none;
-}
-.vav2 {
-    display: flex;
-    text-align: center;
-    justify-content: flex-start;
-    flex-direction: initial;
-    align-items: center;
-    border: 1px solid red;
-    width: 100%;
-}
-.body_bg {
-    background-image: url(https://api.ixiaowai.cn/api/api.php);
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: cover;
-    filter: blur(2.2px);
-    width: 100%;
-    z-index: -1;
-    height: 100%;
-    position: absolute;
-    top: 0;
-}
-div#div_body {
-    display: flex;
-    text-align: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-}
-#hidden{display:none}
-.list_file {
-    float: left;
-
-    margin-right: -100%;
-    display: flex;
-    text-align: center;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-}
-.list_file>a{color: #ff007a;}
-input[type=checkbox] {
-
-    margin: 4px 0 0 4px;
-    margin-right: 20px;
-    line-height: normal;
-    width:20px;
-    height:20px;
-    border-re
-
-}
-.menu {
-    display: flex;
-    text-align: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-}
-.botton-select {
-    display: flex;
-    text-align: center;
-    justify-content: flex-start;
-    flex-direction: row;
-    align-items: flex-start;
-    width: 100%;
-}
-.botton_1 {
-    margin-right: 4%;
-    background: rgb(255 255 255 / 10%);
-    color: #0095ff;
-    border-radius: 10%;
-    margin-left: 4%;
-    border: 1px solid #333;
-    cursor: pointer;
-}
-.renname{display:none;}
-</style>
 <body>
+
+
 <div class="body_bg"></div>
-<header>
+<header class="header">
          <div class="hove">
              <a href="#">全村的希望</a>
          </div>
@@ -244,66 +36,77 @@ input[type=checkbox] {
                 <a href="{% url 'myapp:logout'%}">退出登录</a>
          </div>
   </header>
-<section>
+<div class="section">
 <div class="list">
     <div class="list1">
-        <p>个人信息</p>
+        <p onclick="display_0()">个人信息
+        <i class="fa fa-fw fa-angle-down ml-1" id="fa-angle-down_0"></i>
+             <i class='fa fa-angle-up' id="hidden_0"></i>
+        </p>
+        <div class="G1" id="list_0">
+            <p><a href="{%url 'myapp:ChangePassword'%}">修改密码</a></p>
+        </div>
         <p onclick="display()">
             空间明细
             <i class="fa fa-fw fa-angle-down ml-1" id="fa-angle-down"></i>
              <i class='fa fa-angle-up' id="hidden"></i>
         </p>
+
     </div>
     <div class="G1" id="list2">
+
         {%for use1 in use %}
-        <p class="text"><span>已使用容量/总容量</span>
-           <span id="data">{{use1.Usedspace}}G/{{use1.capacity}}G</span>
+        {% verbatim %}
+        <p class="text">
+       <span id="data">{{Usedspace}}/{{capacity}}</span>
         </p>
+        {% endverbatim %}
+<script type="text/javascript">
+            var Usedspace=Number("{{use1.Usedspace}}").toFixed(2);
+            var capacity=Number("{{use1.capacity}}").toFixed(2);
+            var width=Usedspace/capacity*100
+
+            width=width.toFixed(3)
+</script>
+<script src="{%static 'JS/index_vue.js'%}" type="text/javascript"></script>
         {%endfor%}
-        <div class="container" id="container"></div>
-        <div class="skills loading" id="skills">{{width}}%</div>
+
+        <div class="container1" id="container"><div class="skills loading" id="skills" :style="TheStyle"></div></div>
+{% verbatim %}<p><span id="data1" >{{width1}}%</span></p>{% endverbatim %}
+<script src="{%static 'JS/index_vue.js'%}" type="text/javascript"></script>
+
+
         {%if width >= 80 %}
         <style>
-            .skills{background:red}
+
+            #data1,#data{color:red}
         </style>
         {%elif width >= 60 and width < 80 %}
          <style>
-            .skills{background:yellow}
+
+             #data1,#data{color:yellow}
          </style>
         {% else %}
         <style>
-            .skills{ background-color: #4CAF50;}
+
+             #data1,#data{color:#4CAF50}
         </style>
         {%endif%}
     </div>
-    <script type="text/javascript">
-                 function display() {
-                    var traget=document.getElementById('list2');
-                    var down=document.getElementById("fa-angle-down");
-                    var hidden=document.getElementById("hidden");
-                    //var width = {% widthratio use.Usedspace use.capacity 1%};
-                        if(traget.style.display=="none") {
-                            traget.style.display = 'block';
-                            down.style.display = 'none';
-                            hidden.style.display = 'inline';
-                            document.getElementById("skills").style.width="{{width}}%";
-                            //document.getElementById("container").innerHTML="";
-                        }else{
-                              traget.style.display = 'none';
-                              hidden.style.display = 'none';
-                              down.style.display = 'inline';
-                              }
-                        }
 
-    </script>
+    <div class="file1" id="file1" onclick="inde1x()"><p><a class="reclaim" href="{% url 'myapp:index' %}?folder={{request.session.fileisfolder}}">我的文件<i class="fa fa-angle-right fa-0.3x"></i></a></p></div>
 
+    <div class="file1" id="reclaim" ><p><a class="reclaim" href="{% url 'myapp:reclaim' %}?folder={{request.session.fileisfolder}}" >回收站<i class="fa fa-angle-right fa-0.3x"></i></a></p></div>
+
+    <script type="text/javascript" src="{%static 'JS/ajax.js' %}"></script>
 </div>
-<div class="file">
+<div class="file" id="file">
+    {%block up%}
 <nav class="up">
     <div onclick="document.form1.picpath.click()" class="picpath1 botton_1"><p class="upfile" >上传文件</p></div>
     <form name="form1" action="{%url 'myapp:upfile' %}" method="post" enctype="multipart/form-data">
          {% csrf_token %}
-　<input type="file" name="picpath" id="picpath" style="display:none;" onChange="document.form1.path.value=this.value">
+　<input type="file" name="picpath" id="picpath" style="display:none;" onChange="document.form1.path.value=this.value" >
         <input type="submit" value="提交" class="botton_1"/>
     </form>
     <!--{%url 'myapp:New_folder'%}-->
@@ -314,14 +117,14 @@ input[type=checkbox] {
     {% if request.session.msg == "当前路径已存在新创建的文件夹名称，请重新命名"%}
             <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
     {%elif msg == "请选择文件后，再次上传"%}
-        <script language="javascript">
+        <script type="javascript/text">
             alert("{{request.session.msg}}");
             window.history.back(-1);
             sessionStorage.setItem("msg","1");
         </script>
         {{request.session.msg}}
     {%elif msg == "该路径下有相同的文件，请修改文件名后再次上传"%}
-         <script language="javascript">
+         <script type="javascript/text">
             alert("{{request.session.msg}}")
             window.history.back(-1);
             sessionStorage.setItem("msg","1");
@@ -333,6 +136,12 @@ input[type=checkbox] {
     <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
     {% elif request.session.msg == "请选择文件夹或文件" %}
     <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
+    {% elif request.session.msg == "请重新选择文件，再来重命名" %}
+    <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
+    {% elif request.session.msg == "请选择需要重命名的文件或文件夹" %}
+    <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
+    {% elif request.session.msg == "文件名称中需要包含.等特殊字符" %}
+    <p class="msg" style="text-align: center;color:red "><b>{{request.session.msg}}</b></p>
     {%else%}
     {{msg}}
      {%endif%}
@@ -340,34 +149,93 @@ input[type=checkbox] {
 <div class="vav2">
 
     <p>位置:
-        {% if request.GET.folder == None or request.GET.folder == ""%}
-        {{request.session.name}}
-        {%else%}
-        {{request.GET.folder}}
-        {%endif%}
+<!--        {% if request.GET.folder == None or request.GET.folder == ""%}-->
+<!--        {{request.session.name}}-->
+<!--        {%else%}-->
+<!--        {{request.GET.folder}}-->
+<!--        {%endif%}-->
+{% verbatim %}
+        <span  id="mac" >
+            <a v-for="Filoc in File"  id="mac_a" >
+            {{Filoc}}
+            </a>
+        </span>
+{% endverbatim %}
+        <script>
+            var mac=location.search.split("=");
+            var mac1=decodeURIComponent(mac[1]);
+            mac2="{{request.get.folder}}";
+            console.log(mac2,mac1)
+            if( mac== "" ){
+
+                    console.log(mac);
+                    var File_location=new Vue({
+                      el:"#mac",
+                      data:{
+
+                       File:["{{request.session.name}}"],
+                       mac_url1:mac_url,
+                       }
+                      });
+
+            }else{
+            mac2=mac1.split("\\");
+            var mac3=[mac2[0]];
+            var mac_url=["?folder="];
+            for(var i=1; i<mac2.length;i++){
+                mac2_1="\\"+mac2[i];
+                mac3.push(mac2_1);
+            }
+
+            var mac4=mac3
+            for(var a=1; a<mac4.length;a++){
+                if(mac4[a-1]=="{{request.session.name}}"){
+                    mac4s="?folder="+mac4[a-1]+mac4[a];
+                    mac_url.push(mac4s);
+                }else{
+                mac4s="?folder={{request.session.name}}"+mac4[a-1]+mac4[a];
+                mac_url.push(mac4s);
+                }
+            }
+                console.log(mac4,mac_url)
+            var File_location=new Vue({
+                      el:"#mac",
+                      data:{
+                       File:mac4,
+                       }
+                      });
+          }
+        </script>
+
 
     </p>
 </div>
+    {%endblock up%}
 <form action="" method="post" name="menu" class="menu">
     {% csrf_token %}
 <div class="file_list" id="div_body">
 
    {% comment %}展示文件夹{%endcomment%}
     <div>
- {%if request.GET.folder == None or request.GET.folder == ""%}
+
+ {%if request.GET.folder == None or request.GET.folder == "" or request.GET.folder == request.session.name %}
+        <P class="list_file2">文件名</p>
  {%else%}
         <p type=button value="Previous Page" onClick="javascript:history.go(-1);" class="Previous list_file">../</p></br>
         <style>
             .Previous{
             display:block;
+            width:0
             }
         </style>
+        <P class="list_file2">文件名</p>
+
  {% endif %}
+        <p class="msg1">该文件夹暂无文件，请上传后重新进入</p>
 
     {%for folder1 in folder  %}
         {% if folder1.file_is_folder == request.session.fileisfolder %}
-
-        <P class="list_file"><input id="checkbox1" name="checkbox1" type="checkbox" value="{{folder1.File}}"><a href="{%url 'myapp:index' %}?folder={{folder1.file_is_folder}}\{{folder1.File}}">{{folder1.File}}</a></P></br>
+        <P class="list_file">{% block input %}<input id="checkbox1" name="checkbox1" type="checkbox" value="{{folder1.File}}"><a href="{%url 'myapp:index' %}?folder={{folder1.file_is_folder}}\{{folder1.File}}">{{folder1.File}}</a>{% endblock input %}</P></br>
         {%endif%}
     {%endfor%}
     </div>
@@ -382,59 +250,22 @@ input[type=checkbox] {
    <div>
     {%for folder2 in folder2 %}
        {% if folder2.file_is_folder == request.session.fileisfolder %}
-   <P class="list_file" ><input id="checkbox2" name="checkbox2" type="checkbox" value="{{folder2.File}}文件"><a href="{%url 'myapp:upfile' %}{{folder2.file_is_folder}}/{{folder2.File}}">{{folder2.File}}</a></P>
+   <P class="list_file" >{% block input2 %}<input id="checkbox2" name="checkbox2" type="checkbox" value="{{folder2.File}}文件"><a href="{%url 'myapp:upfile' %}{{folder2.file_is_folder}}/{{folder2.File}}">{{folder2.File}}</a>{% endblock input2 %}</P>
        </br>
-
-
        {% endif %}
     {%endfor%}
     </div>
     <div id="renname" class="renname">
-          <input type="text" name="folder_name1" placeholder="请输入新文件(夹)名称" maxlength="45">
+          <input type="text" name="folder_name1" placeholder="请输入新文件(夹)名称" maxlength="45" class="renname1">
           <button id="save1" onclick="rename()" class="botton_2" >确认修改</button>
     </div>
-        <div class="botton-select"><button id="delte" type="submit" value="" onclick="Delete()" class="botton_1">删除</button>
-        <div id="botton_1" class="botton_1" type="submit" value="" onclick="renname1()">重命名</div>
-<script type="text/javascript">
-                 function renname1() {
-                    var traget=document.getElementById('renname');
-                    var checkbox1 = document.getElementById('checkbox1');
-                    var checkbox2 = document.getElementById('checkbox2');
-                    var radio1 = document.getElementsByName('checkbox1');
-                    var radio2 = document.getElementsByName('checkbox2');
-                    var Delete = document.getElementById('delte');
-                    document.getElementById("botton_1").innerHTML="取消重命名";
-                    if(traget.style.display=="none") {
-                            traget.style.display = 'block';
-                            Delete.style.display = 'none';
+        {% block del %}
+    <div class="botton-select">
+        <button id="delte" type="submit" value="" onclick="Delete()" class="botton_1 botton_2">删除</button><!---->
+        <div id="botton_1" class="botton_1 botton_2" type="submit" value="" onclick="renname1()"><a href="{% url 'myapp:renname1' %}?folder={{request.session.fileisfolder}}">重命名</a></div>
+    </div>
 
-                            for (i=0;i < radio1.length;i++){
-                            radio1[i].type='radio';
-                            }
-                            for (b=0;b <= radio2.length;b++){
-                            radio2[b].type='radio';
-                            radio2[b].name='checkbox1';
-                    }
-
-                    }else{
-                              document.getElementById("botton_1").innerHTML="重命名";
-                              traget.style.display = 'none';
-                              Delete.style.display = 'block';
-                              for (c=0;c < radio1.length;c++){
-                            radio1[c].type='checkbox';
-                            }
-                            for (d=0;d < radio2.length;d++){
-                            radio2[d].type='checkbox';
-                            radio2[d].name='checkbox2';
-
-                            }
-
-                              }
-                    }
-
-    </script>
-        </div>
-{% comment %}
+    {% endblock del %}
     <script type="text/javascript">
         function Delete(){
         document.menu.method="post";
@@ -459,13 +290,41 @@ input[type=checkbox] {
         if(checkbox1.checked >= 2 ){
             botton_1.style.display="None"
         }else{
-         botton_1.style.display="block"
+         botton_1.style.display="inline-block"
         }
 
     </script>
-    {% endcomment %}
+</div>
+<div class="time">
+    {%if request.GET.folder == None or request.GET.folder == ""%}
+        <p class="list_file1">文件上传时间</p>
+ {%else%}
+        <p type=button value="Previous Page" onClick="javascript:history.go(-1);" class="Previous list_file"></p></br>
+        <style>
+            .Previous{
+            display:block;
+            }
+        </style>
+         <p class="list_file1">文件上传时间</p>
+ {% endif %}
+    {%for folder1 in folder  %}
+       {% if folder1.file_is_folder == request.session.fileisfolder %}
+   <P class="time_p" >{{folder1.Upload_date|date:"Y-m-d H:i:s" }}</P>
+        {% endif %}
+    {%endfor %}
+    {%for folder2 in folder2 %}
+       {% if folder2.file_is_folder == request.session.fileisfolder %}
+   <P class="time_p" >{{folder2.Upload_date|date:"Y-m-d H:i:s" }}</P>
+        {%endif%}
+    {% endfor %}
+
+
+
+
+
 </div>
 </form>
+
 <script>
     $("#div_add").click(function() {
             $('#adduse').show();
@@ -487,6 +346,39 @@ input[type=checkbox] {
 </div>
 
 
-</section>
+</div>
+          {% if folder3 == 1%}
+                <style>
+                    .list_file2,.list_file1,.botton-select{display:inline-block;;}
+                    .msg1{
+                    display:none;
+                    }
+                </style>
+          {% else %}
+                <style>
+                    .list_file2,.list_file1,.botton-select{display:none;}
+                    .msg1{
+                    display:block;
+                    }
+                </style>
+            {% endif %}
+{% comment %}
+<!--<div id="p">-->
+<!--<p v-if="a==2" >1</p>-->
+<!--<p v-else-if="a==3" >2</p>-->
+<!--<p v-else-if="b==6 && a==5"  >3</p>-->
+<!--<p v-else >4</p>-->
+<!--</div>-->
+<!--<script type="text/javascript">-->
+<!--    var pdawd=new Vue({-->
+<!--    el:"#p",-->
+<!--    data:{-->
+<!--    a:51,-->
+<!--    b:6,-->
+<!--    }-->
+
+<!--    })-->
+<!--</script>-->
+{% endcomment %}
 </body>
 </html>

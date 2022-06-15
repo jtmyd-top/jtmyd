@@ -1,0 +1,116 @@
+{% extends 'index.html' %}
+{% block title %}
+    <title>回收站</title>
+<link rel="stylesheet" href="{%static 'css/reclaim.css'%}">
+<script src="{%static 'JS/ajax.js'%}" type="text/javascript"></script>
+{% endblock title %}
+{% block up %}
+<form action="" method="" name="Recover" class="Recover">
+    {% csrf_token %}
+<style>.up,.menu{display:none}
+.file {
+    border-left: 1px solid rgb(7 246 155 / 71%);
+    width: 79%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
+}
+</style>
+<div class="File_a">
+
+<div class="file1">
+    <div class="file1">
+ {%if folder3 == 1%}
+        <P class="list_file">文件名</p>
+    <style>
+        .list_file {
+    float: left;
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 0;
+    width: 100%;
+}
+        </style>
+ {%else%}
+        <p class="msg1">暂无文件(夹)文件，请清理文件后重新进入</p>
+        <style>
+            .button{
+                display:none;
+            }
+        </style>
+ {% endif  %}
+ </div>
+    {%for folder1 in folder  %}
+
+        <P class="list_file">{% block input %}<input id="checkbox1" name="checkbox1" type="checkbox" value="{{folder1.File}}"><a href="#">{{folder1.File}}</a>{% endblock input %}</P></br>
+    {%endfor%}
+    {%for folder2 in folder2 %}
+   <P class="list_file" >{% block input2 %}<input id="checkbox2" name="checkbox2" type="checkbox" value="{{folder2.File}}文件"><a href="#">{{folder2.File}}</a>{% endblock input2 %}</P>
+       </br>
+    {%endfor%}
+</div>
+
+
+
+<div class="file1">
+     <div class="file1">
+ {%if folder3 == 1%}
+        <P class="list_file">文件(夹)删除日期</p>
+    <style>
+        .list_file {
+    float: left;
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 0;
+    width: 100%;
+}
+        </style>
+ {%else%}
+        <p class="msg1"></p>
+ {% endif  %}
+ </div>
+    {%for folder1 in folder  %}
+        <P class="list_file"><a href="#">{{folder1.createTime|date:"Y-m-d H:i:s"}}</a></P></br>
+    {%endfor%}
+    {%for folder2 in folder2 %}
+   <P class="list_file" ><a href="#">{{folder2.createTime|date:"Y-m-d H:i:s"}}</a></P>
+       </br>
+    {%endfor%}
+</div>
+</div>
+
+<div class="button">
+
+<button onclick="Recover_Files()" id="botton_2" class="botton_1 botton_2"  style="display: inline-block"><a>恢复</a></button>
+<script type="text/javascript">
+    function Recover_Files(){
+        document.Recover.method="post";
+        document.Recover.action="{% url 'myapp:Recover_Files'%}";
+        document.Recover.submit();
+        return true;}
+    function Delete_2(){
+        document.Recover.method="post";
+        document.Recover.action="#";
+        document.Recover.submit();
+        return true;}
+</script>
+</div>
+</form>
+
+{% endblock up %}
+
+
+
+
+
+
+
