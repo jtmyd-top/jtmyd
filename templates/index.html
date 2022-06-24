@@ -149,15 +149,10 @@
 <div class="vav2">
 
     <p>位置:
-<!--        {% if request.GET.folder == None or request.GET.folder == ""%}-->
-<!--        {{request.session.name}}-->
-<!--        {%else%}-->
-<!--        {{request.GET.folder}}-->
-<!--        {%endif%}-->
 {% verbatim %}
         <span  id="mac" >
-            <a v-for="Filoc in File"  id="mac_a" >
-            {{Filoc}}
+            <a v-for="Filoc,url in File,Aurl"  id="mac_a"  :href="Filoc">
+            {{File[url]}}
             </a>
         </span>
 {% endverbatim %}
@@ -165,19 +160,15 @@
             var mac=location.search.split("=");
             var mac1=decodeURIComponent(mac[1]);
             mac2="{{request.get.folder}}";
-            console.log(mac2,mac1)
-            if( mac== "" ){
-
-                    console.log(mac);
-                    var File_location=new Vue({
+            console.log(mac,"{{request.get.folder}}","{{request.session.name}}")
+            if( location.search== "" || mac[1]==""){
+                new Vue({
                       el:"#mac",
                       data:{
-
                        File:["{{request.session.name}}"],
-                       mac_url1:mac_url,
+                       Aurl:[mac_url],
                        }
                       });
-
             }else{
             mac2=mac1.split("\\");
             var mac3=[mac2[0]];
@@ -186,25 +177,31 @@
                 mac2_1="\\"+mac2[i];
                 mac3.push(mac2_1);
             }
-
             var mac4=mac3
             for(var a=1; a<mac4.length;a++){
                 if(mac4[a-1]=="{{request.session.name}}"){
                     mac4s="?folder="+mac4[a-1]+mac4[a];
                     mac_url.push(mac4s);
                 }else{
+                if(a>2){
+                    mac4s=mac_url[a-1]+mac4[a];
+                    mac_url.push(mac4s);
+                }else{
                 mac4s="?folder={{request.session.name}}"+mac4[a-1]+mac4[a];
                 mac_url.push(mac4s);
                 }
+                }
             }
-                console.log(mac4,mac_url)
-            var File_location=new Vue({
+            console.log(mac3,mac_url,a)
+            new Vue({
                       el:"#mac",
                       data:{
-                       File:mac4,
+                        File:mac3,
+                        Aurl:mac_url
                        }
                       });
           }
+
         </script>
 
 
